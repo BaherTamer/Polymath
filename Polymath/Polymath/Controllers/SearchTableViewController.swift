@@ -5,13 +5,14 @@
 //  Created by Baher Tamer on 24/08/2023.
 //
 
+import Alamofire
 import UIKit
 
 class SearchTableViewController: UITableViewController {
     
     let searchItemCellId = "SearchItemTableViewCell"
     
-    let podcasts: [Podcast] = Podcast.podcasts
+    var podcasts: [Podcast] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,7 @@ extension SearchTableViewController {
         let podcast = self.podcasts[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: searchItemCellId, for: indexPath)
-        cell.textLabel?.text = "\(podcast.name)\n\(podcast.author)"
+        cell.textLabel?.text = "\(podcast.trackName ?? "N/A")\n\(podcast.artistName ?? "N/A")"
         cell.textLabel?.numberOfLines = -1
         
         return cell
@@ -58,7 +59,31 @@ extension SearchTableViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        // TODO: - Seach Podcasts Logic
+        let url = "https://itunes.apple.com/search"
+        let parameters = ["term": searchText, "media": "podcast"]
+        
+        let request = AF.request(url, method: .get, parameters: parameters, encoder: .urlEncodedForm)
+        
+        request.responseData { returnedData in
+            if let error = returnedData.error {
+                print("DEBUG: Failed to fetch data, \(error)")
+                return
+            }
+            
+            guard let data = returnedData.data else {
+                print("DEBUG: No data can be found")
+                return
+            }
+            
+            do {
+                let searchResult = try JSONDecoder().decode(SearchResult.self, from: data)
+                
+                self.podcasts = searchResult.results
+                self.tableView.reloadData()
+            } catch {
+                print("DEBUG: Failed to decode data")
+            }
+        }
     }
     
 }
