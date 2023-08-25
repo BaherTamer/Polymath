@@ -9,9 +9,9 @@ import UIKit
 
 class SearchTableViewController: UITableViewController {
     
-    let searchItemCellId = "SearchItemTableViewCell"
+    private let searchItemCellId = "SearchItemTableViewCell"
     
-    let podcasts: [Podcast] = Podcast.podcasts
+    private var podcasts: [Podcast] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +37,7 @@ extension SearchTableViewController {
         let podcast = self.podcasts[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: searchItemCellId, for: indexPath)
-        cell.textLabel?.text = "\(podcast.name)\n\(podcast.author)"
+        cell.textLabel?.text = "\(podcast.trackName ?? "N/A")\n\(podcast.artistName ?? "N/A")"
         cell.textLabel?.numberOfLines = -1
         
         return cell
@@ -58,7 +58,12 @@ extension SearchTableViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        // TODO: - Seach Podcasts Logic
+        
+        APIManager.shared.fetchPodcasts(from: searchText) { fetchedPodcasts in
+            self.podcasts = fetchedPodcasts
+            self.tableView.reloadData()
+        }
+        
     }
     
 }

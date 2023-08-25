@@ -7,17 +7,17 @@
 
 import Foundation
 
-struct Podcast {
-    let name: String
-    let author: String
+struct Podcast: Decodable {
+    let trackName: String?
+    let artistName: String?
 }
 
 extension Podcast {
     
     static var podcasts: [Podcast] {
         [
-            Podcast(name: "HazCast", author: "Hazem El Seddiq"),
-            Podcast(name: "Droos Podcast", author: "Ahmed Abouzaid")
+            Podcast(trackName: "HazCast", artistName: "Hazem El Seddiq"),
+            Podcast(trackName: "Droos Podcast", artistName: "Ahmed Abouzaid")
         ]
     }
     
