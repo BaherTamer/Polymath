@@ -30,6 +30,7 @@ class PodcastSearchTableViewCell: UITableViewCell {
     func configure(with podcast: Podcast) {
         artistLabel.text = podcast.artistName
         trackLabel.text = podcast.trackName
+        numberOfEpisodesLabel.text = "\(podcast.trackCount ?? 0) Episodes"
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
