@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class PodcastSearchTableViewCell: UITableViewCell {
     
@@ -31,6 +32,13 @@ class PodcastSearchTableViewCell: UITableViewCell {
         artistLabel.text = podcast.artistName
         trackLabel.text = podcast.trackName
         numberOfEpisodesLabel.text = "\(podcast.trackCount ?? 0) Episodes"
+        
+        guard let imageURL = URL(string: podcast.artworkUrl600 ?? "") else {
+            print("DEBUG: Failed to load podcast image URL.")
+            return
+        }
+        
+        podcastImageView.sd_setImage(with: imageURL)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
