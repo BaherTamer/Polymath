@@ -26,7 +26,13 @@ class SearchTableViewController: UITableViewController {
 extension SearchTableViewController {
     
     private func setupTableViewCell() {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: self.searchItemCellId)
+        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.tableView.showsVerticalScrollIndicator = false
+        
+        tableView.register(
+            UINib(nibName: PodcastSearchTableViewCell.cellIdentifier, bundle: nil),
+            forCellReuseIdentifier: PodcastSearchTableViewCell.cellIdentifier
+        )
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -34,11 +40,12 @@ extension SearchTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let podcast = self.podcasts[indexPath.row]
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: PodcastSearchTableViewCell.cellIdentifier,
+            for: indexPath) as! PodcastSearchTableViewCell
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: searchItemCellId, for: indexPath)
-        cell.textLabel?.text = "\(podcast.trackName ?? "N/A")\n\(podcast.artistName ?? "N/A")"
-        cell.textLabel?.numberOfLines = -1
+        let podcast = self.podcasts[indexPath.row]
+        cell.configure(with: podcast)
         
         return cell
     }
