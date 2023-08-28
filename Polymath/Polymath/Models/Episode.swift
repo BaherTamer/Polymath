@@ -13,13 +13,15 @@ struct Episode {
     let artistName: String
     let pubDate: Date
     let duration: TimeInterval
+    let artworkUrl600: String
 }
 
 extension Episode {
-    init(feed: RSSFeedItem, artistName: String) {
+    init(feed: RSSFeedItem, podcast: Podcast) {
         self.title = feed.title ?? "N/A"
-        self.artistName = artistName
+        self.artistName = podcast.artistName ?? "N/A"
         self.pubDate = feed.pubDate ?? .now
         self.duration = feed.iTunes?.iTunesDuration ?? .zero
+        self.artworkUrl600 = podcast.artworkUrl600 ?? ""
     }
 }

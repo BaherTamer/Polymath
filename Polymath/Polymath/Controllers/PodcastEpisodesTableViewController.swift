@@ -62,7 +62,9 @@ extension PodcastEpisodesTableViewController {
     
     private func appendRSSFeedToEpisodes(feed: Feed) {
         feed.rssFeed?.items?.forEach { rssFeedItem in
-            let episode = Episode(feed: rssFeedItem, artistName: self.podcast?.artistName ?? "N/A")
+            
+            guard let podcast else { return }
+            let episode = Episode(feed: rssFeedItem, podcast: podcast)
             episodes.append(episode)
         }
         
