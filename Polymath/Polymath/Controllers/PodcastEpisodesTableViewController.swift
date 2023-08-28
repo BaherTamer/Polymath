@@ -12,24 +12,63 @@ class PodcastEpisodesTableViewController: UITableViewController {
     
     var podcast: Podcast?
     
-    var episodes: [Episode] = [
-        Episode(title: "Episode Number 1"),
-        Episode(title: "Episode Number 2"),
-        Episode(title: "Episode Number 3"),
-        Episode(title: "Episode Number 4"),
-        Episode(title: "Episode Number 5"),
-        Episode(title: "Episode Number 6")
-    ]
+    var episodes: [Episode] = []
     
     static let cellIdentifier: String = "EpisodeTableViewCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = podcast?.trackName ?? "N/A"
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Self.cellIdentifier)
+        configure()
+    }
+    
+}
+
+// MARK: - Configuration Functions
+extension PodcastEpisodesTableViewController {
+    
+    private func configure() {
+        navigationItem.title = self.podcast?.trackName ?? "N/A"
         
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Self.cellIdentifier)
         //tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero, size: .init(width: 200, height: 400)))
+        
+        fetchEpisodes()
+    }
+    
+    private func fetchEpisodes() {
+        guard let url = getEpisodesURL() else { return }
+        
+        let parser = FeedParser(URL: url)
+        parser.parseAsync { result in
+            switch result {
+            case let .success(feed):
+                self.appendRSSFeedToEpisodes(feed: feed)
+                break
+            case let .failure(error):
+                print("DEBUG: Failed to parse podcast episodes feed,", error)
+                break
+            }
+        }
+    }
+    
+    private func getEpisodesURL() -> URL? {
+        guard let feedURL = self.podcast?.feedUrl else { return nil }
+        
+        let httpsFeedURL = feedURL.contains("https") ? feedURL : feedURL.replacingOccurrences(of: "http", with: "https")
+        
+        return URL(string: httpsFeedURL)
+    }
+    
+    private func appendRSSFeedToEpisodes(feed: Feed) {
+        feed.rssFeed?.items?.forEach { rssFeedItem in
+            let episode = Episode(title: rssFeedItem.title ?? "N/A")
+            episodes.append(episode)
+        }
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
 }
