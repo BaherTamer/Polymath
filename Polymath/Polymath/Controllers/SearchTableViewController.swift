@@ -50,6 +50,14 @@ extension SearchTableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let podcastEpisodesVC = PodcastEpisodesTableViewController()
+        let podcast = self.podcasts[indexPath.row]
+        podcastEpisodesVC.podcast = podcast
+        
+        navigationController?.pushViewController(podcastEpisodesVC, animated: true)
+    }
+    
 }
 
 // MARK: - Search Bar Functions
@@ -57,6 +65,8 @@ extension SearchTableViewController: UISearchBarDelegate {
     
     private func setupSearchBar() {
         let searchController = UISearchController(searchResultsController: nil)
+        
+        self.definesPresentationContext = true
         
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
