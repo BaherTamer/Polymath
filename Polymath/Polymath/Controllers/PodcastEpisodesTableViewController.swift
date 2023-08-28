@@ -13,8 +13,6 @@ class PodcastEpisodesTableViewController: UITableViewController {
     var podcast: Podcast?
     
     var episodes: [Episode] = []
-    
-    static let cellIdentifier: String = "EpisodeTableViewCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +28,7 @@ extension PodcastEpisodesTableViewController {
     private func configure() {
         navigationItem.title = self.podcast?.trackName ?? "N/A"
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Self.cellIdentifier)
-        //tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero, size: .init(width: 200, height: 400)))
-        
+        setupTableViewCell()
         fetchEpisodes()
     }
     
@@ -78,16 +74,28 @@ extension PodcastEpisodesTableViewController {
 // MARK: - TableVIew Functions
 extension PodcastEpisodesTableViewController {
     
+    private func setupTableViewCell() {
+        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.tableView.showsVerticalScrollIndicator = false
+        
+        tableView.register(
+            UINib(nibName: PodcastEpisodeTableViewCell.cellIdentifier, bundle: nil),
+            forCellReuseIdentifier: PodcastEpisodeTableViewCell.cellIdentifier
+        )
+        
+        //tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero, size: .init(width: 200, height: 400)))
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.episodes.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Self.cellIdentifier, for: indexPath)
-        let episode = episodes[indexPath.row]
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: PodcastEpisodeTableViewCell.cellIdentifier,
+            for: indexPath) as! PodcastEpisodeTableViewCell
         
-        cell.textLabel?.text = episode.title
-        
+        cell.configure(with: self.episodes[indexPath.row])
         return cell
     }
     
