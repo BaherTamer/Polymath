@@ -33,39 +33,14 @@ extension PodcastEpisodesTableViewController {
     }
     
     private func fetchEpisodes() {
-        guard let url = getEpisodesURL() else { return }
+        guard let podcast else { return }
         
-        let parser = FeedParser(URL: url)
-        parser.parseAsync { result in
-            switch result {
-            case let .success(feed):
-                self.appendRSSFeedToEpisodes(feed: feed)
-                break
-            case let .failure(error):
-                print("DEBUG: Failed to parse podcast episodes feed,", error)
-                break
-            }
-        }
-    }
-    
-    private func getEpisodesURL() -> URL? {
-        guard let feedURL = self.podcast?.feedUrl else { return nil }
-        
-        let httpsFeedURL = feedURL.contains("https") ? feedURL : feedURL.replacingOccurrences(of: "http", with: "https")
-        
-        return URL(string: httpsFeedURL)
-    }
-    
-    private func appendRSSFeedToEpisodes(feed: Feed) {
-        feed.rssFeed?.items?.forEach { rssFeedItem in
+        APIManager.shared.fetchEpisodes(for: podcast, urlString: podcast.feedUrl ?? "") { fetchedEpisodes in
+            self.episodes = fetchedEpisodes
             
-            guard let podcast else { return }
-            let episode = Episode(feed: rssFeedItem, podcast: podcast)
-            episodes.append(episode)
-        }
-        
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     

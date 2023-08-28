@@ -6,6 +6,7 @@
 //
 
 import Alamofire
+import FeedKit
 import Foundation
 
 class APIManager {
@@ -50,6 +51,43 @@ extension APIManager {
                 print("DEBUG: Failed to decode data")
             }
         }
+    }
+    
+}
+
+extension APIManager {
+    
+    func fetchEpisodes(for podcast: Podcast, urlString: String, completionHandler: @escaping ([Episode]) -> ()) {
+        guard let url = getEpisodesURL(from: urlString) else { return }
+        
+        let parser = FeedParser(URL: url)
+        parser.parseAsync { result in
+            switch result {
+            case let .success(feed):
+                completionHandler(self.appendRSSFeedToEpisodes(feed: feed, podcast: podcast))
+                break
+            case let .failure(error):
+                print("DEBUG: Failed to parse podcast episodes feed,", error)
+                break
+            }
+        }
+    }
+    
+    private func getEpisodesURL(from string: String) -> URL? {
+        let httpsFeedURL = string.contains("https") ? string : string.replacingOccurrences(of: "http", with: "https")
+        
+        return URL(string: httpsFeedURL)
+    }
+    
+    private func appendRSSFeedToEpisodes(feed: Feed, podcast: Podcast) -> [Episode] {
+        var episodes: [Episode] = []
+        
+        feed.rssFeed?.items?.forEach { rssFeedItem in
+            let episode = Episode(feed: rssFeedItem, podcast: podcast)
+            episodes.append(episode)
+        }
+        
+        return episodes
     }
     
 }
