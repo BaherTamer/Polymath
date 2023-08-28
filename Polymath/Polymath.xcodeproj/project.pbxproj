@@ -25,6 +25,7 @@
 		6EE60AD02A9B9F28006C9DAE /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6EE60ACF2A9B9F28006C9DAE /* SDWebImage */; };
 		6EE60AD22A9C8B9C006C9DAE /* PodcastEpisodesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60AD12A9C8B9C006C9DAE /* PodcastEpisodesTableViewController.swift */; };
 		6EE60AD42A9C8CE9006C9DAE /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60AD32A9C8CE9006C9DAE /* Episode.swift */; };
+		6EED341F2A9D298500000212 /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6EED341E2A9D298500000212 /* FeedKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EED341F2A9D298500000212 /* FeedKit in Frameworks */,
 				6EE60AD02A9B9F28006C9DAE /* SDWebImage in Frameworks */,
 				6EE60ABF2A97C876006C9DAE /* Alamofire in Frameworks */,
 			);
@@ -168,6 +170,7 @@
 			packageProductDependencies = (
 				6EE60ABE2A97C876006C9DAE /* Alamofire */,
 				6EE60ACF2A9B9F28006C9DAE /* SDWebImage */,
+				6EED341E2A9D298500000212 /* FeedKit */,
 			);
 			productName = Polymath;
 			productReference = 6E73F8CA2A974B1300DCAC44 /* Polymath.app */;
@@ -200,6 +203,7 @@
 			packageReferences = (
 				6EE60ABD2A97C876006C9DAE /* XCRemoteSwiftPackageReference "Alamofire" */,
 				6EE60ACE2A9B9F28006C9DAE /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				6EED341D2A9D298500000212 /* XCRemoteSwiftPackageReference "FeedKit" */,
 			);
 			productRefGroup = 6E73F8CB2A974B1300DCAC44 /* Products */;
 			projectDirPath = "";
@@ -486,6 +490,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		6EED341D2A9D298500000212 /* XCRemoteSwiftPackageReference "FeedKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nmdias/FeedKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -498,6 +510,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6EE60ACE2A9B9F28006C9DAE /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		6EED341E2A9D298500000212 /* FeedKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6EED341D2A9D298500000212 /* XCRemoteSwiftPackageReference "FeedKit" */;
+			productName = FeedKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
