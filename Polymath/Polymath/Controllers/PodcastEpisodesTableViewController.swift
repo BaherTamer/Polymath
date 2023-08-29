@@ -6,6 +6,7 @@
 //
 
 import FeedKit
+import SDWebImage
 import UIKit
 
 class PodcastEpisodesTableViewController: UITableViewController {
@@ -26,9 +27,10 @@ class PodcastEpisodesTableViewController: UITableViewController {
 extension PodcastEpisodesTableViewController {
     
     private func configure() {
-        navigationItem.title = self.podcast?.trackName ?? "N/A"
+        navigationItem.largeTitleDisplayMode = .never
         
         setupTableViewCell()
+        setupTableHeaderView()
         fetchEpisodes()
     }
     
@@ -57,12 +59,30 @@ extension PodcastEpisodesTableViewController {
             UINib(nibName: PodcastEpisodeTableViewCell.cellIdentifier, bundle: nil),
             forCellReuseIdentifier: PodcastEpisodeTableViewCell.cellIdentifier
         )
+    }
+    
+    private func setupTableHeaderView() {
+        let headerView = PodcastTableHeaderView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 350))
         
-        //tableView.tableHeaderView = UIView(frame: CGRect(origin: .zero, size: .init(width: 200, height: 400)))
+        guard let imageURL = URL(string: self.podcast?.artworkUrl600 ?? "") else {
+            print("DEBUG: Failed to load podcast image URL.")
+            return
+        }
+        
+        headerView.podcastImageView.sd_setImage(with: imageURL)
+        headerView.artistLabel.text = self.podcast?.artistName ?? "N/A"
+        headerView.podcastLabel.text = self.podcast?.trackName ?? "N/A"
+        headerView.followButton.setTitle("Follow", for: .normal)
+        
+        tableView.tableHeaderView = headerView
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.episodes.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        "Episodes"
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
