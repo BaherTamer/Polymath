@@ -13,6 +13,7 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         
         UINavigationBar.appearance().prefersLargeTitles = true
+        UINavigationBar.appearance().tintColor = .systemPink
         
         setupTabBarViewControllers()
     }
