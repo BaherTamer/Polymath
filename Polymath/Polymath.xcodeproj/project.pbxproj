@@ -10,6 +10,7 @@
 		6E61DF292A979BFC008205D0 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E61DF282A979BFC008205D0 /* MainTabBarController.swift */; };
 		6E61DF2B2A97A824008205D0 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E61DF2A2A97A824008205D0 /* SearchTableViewController.swift */; };
 		6E61DF2E2A97AB07008205D0 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E61DF2D2A97AB07008205D0 /* Podcast.swift */; };
+		6E65F4BA2A9E801B00E9A159 /* PodcastTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E65F4B92A9E801B00E9A159 /* PodcastTableHeaderView.swift */; };
 		6E73F8CE2A974B1300DCAC44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E73F8CD2A974B1300DCAC44 /* AppDelegate.swift */; };
 		6E73F8D02A974B1300DCAC44 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E73F8CF2A974B1300DCAC44 /* SceneDelegate.swift */; };
 		6E73F8D22A974B1300DCAC44 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E73F8D12A974B1300DCAC44 /* ViewController.swift */; };
@@ -23,12 +24,18 @@
 		6EE60ACC2A989B1A006C9DAE /* PodcastSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60ACA2A989B1A006C9DAE /* PodcastSearchTableViewCell.swift */; };
 		6EE60ACD2A989B1A006C9DAE /* PodcastSearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE60ACB2A989B1A006C9DAE /* PodcastSearchTableViewCell.xib */; };
 		6EE60AD02A9B9F28006C9DAE /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6EE60ACF2A9B9F28006C9DAE /* SDWebImage */; };
+		6EE60AD22A9C8B9C006C9DAE /* PodcastEpisodesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60AD12A9C8B9C006C9DAE /* PodcastEpisodesTableViewController.swift */; };
+		6EE60AD42A9C8CE9006C9DAE /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE60AD32A9C8CE9006C9DAE /* Episode.swift */; };
+		6EED341F2A9D298500000212 /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6EED341E2A9D298500000212 /* FeedKit */; };
+		6EED34232A9D36CD00000212 /* PodcastEpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED34212A9D36CD00000212 /* PodcastEpisodeTableViewCell.swift */; };
+		6EED34242A9D36CD00000212 /* PodcastEpisodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EED34222A9D36CD00000212 /* PodcastEpisodeTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6E61DF282A979BFC008205D0 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		6E61DF2A2A97A824008205D0 /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		6E61DF2D2A97AB07008205D0 /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
+		6E65F4B92A9E801B00E9A159 /* PodcastTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastTableHeaderView.swift; sourceTree = "<group>"; };
 		6E73F8CA2A974B1300DCAC44 /* Polymath.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Polymath.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E73F8CD2A974B1300DCAC44 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E73F8CF2A974B1300DCAC44 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +49,10 @@
 		6EE60AC62A9891FE006C9DAE /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		6EE60ACA2A989B1A006C9DAE /* PodcastSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastSearchTableViewCell.swift; sourceTree = "<group>"; };
 		6EE60ACB2A989B1A006C9DAE /* PodcastSearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PodcastSearchTableViewCell.xib; sourceTree = "<group>"; };
+		6EE60AD12A9C8B9C006C9DAE /* PodcastEpisodesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastEpisodesTableViewController.swift; sourceTree = "<group>"; };
+		6EE60AD32A9C8CE9006C9DAE /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
+		6EED34212A9D36CD00000212 /* PodcastEpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastEpisodeTableViewCell.swift; sourceTree = "<group>"; };
+		6EED34222A9D36CD00000212 /* PodcastEpisodeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PodcastEpisodeTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EED341F2A9D298500000212 /* FeedKit in Frameworks */,
 				6EE60AD02A9B9F28006C9DAE /* SDWebImage in Frameworks */,
 				6EE60ABF2A97C876006C9DAE /* Alamofire in Frameworks */,
 			);
@@ -62,6 +74,7 @@
 			children = (
 				6E61DF282A979BFC008205D0 /* MainTabBarController.swift */,
 				6E61DF2A2A97A824008205D0 /* SearchTableViewController.swift */,
+				6EE60AD12A9C8B9C006C9DAE /* PodcastEpisodesTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -71,6 +84,7 @@
 			children = (
 				6E61DF2D2A97AB07008205D0 /* Podcast.swift */,
 				6EE60AC02A988A19006C9DAE /* SearchResult.swift */,
+				6EE60AD32A9C8CE9006C9DAE /* Episode.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -129,6 +143,8 @@
 		6EE60AC82A989ADD006C9DAE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6E65F4B92A9E801B00E9A159 /* PodcastTableHeaderView.swift */,
+				6EED34202A9D36AD00000212 /* Podcast Episode Cell */,
 				6EE60AC92A989AEC006C9DAE /* Podcast Search Cell */,
 			);
 			path = Views;
@@ -141,6 +157,15 @@
 				6EE60ACB2A989B1A006C9DAE /* PodcastSearchTableViewCell.xib */,
 			);
 			path = "Podcast Search Cell";
+			sourceTree = "<group>";
+		};
+		6EED34202A9D36AD00000212 /* Podcast Episode Cell */ = {
+			isa = PBXGroup;
+			children = (
+				6EED34212A9D36CD00000212 /* PodcastEpisodeTableViewCell.swift */,
+				6EED34222A9D36CD00000212 /* PodcastEpisodeTableViewCell.xib */,
+			);
+			path = "Podcast Episode Cell";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +187,7 @@
 			packageProductDependencies = (
 				6EE60ABE2A97C876006C9DAE /* Alamofire */,
 				6EE60ACF2A9B9F28006C9DAE /* SDWebImage */,
+				6EED341E2A9D298500000212 /* FeedKit */,
 			);
 			productName = Polymath;
 			productReference = 6E73F8CA2A974B1300DCAC44 /* Polymath.app */;
@@ -194,6 +220,7 @@
 			packageReferences = (
 				6EE60ABD2A97C876006C9DAE /* XCRemoteSwiftPackageReference "Alamofire" */,
 				6EE60ACE2A9B9F28006C9DAE /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				6EED341D2A9D298500000212 /* XCRemoteSwiftPackageReference "FeedKit" */,
 			);
 			productRefGroup = 6E73F8CB2A974B1300DCAC44 /* Products */;
 			projectDirPath = "";
@@ -213,6 +240,7 @@
 				6E73F8D72A974B1400DCAC44 /* Assets.xcassets in Resources */,
 				6EE60ACD2A989B1A006C9DAE /* PodcastSearchTableViewCell.xib in Resources */,
 				6E73F8D52A974B1300DCAC44 /* Main.storyboard in Resources */,
+				6EED34242A9D36CD00000212 /* PodcastEpisodeTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,15 +252,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E73F8D22A974B1300DCAC44 /* ViewController.swift in Sources */,
+				6EE60AD42A9C8CE9006C9DAE /* Episode.swift in Sources */,
 				6EE60AC12A988A19006C9DAE /* SearchResult.swift in Sources */,
 				6EE60ACC2A989B1A006C9DAE /* PodcastSearchTableViewCell.swift in Sources */,
 				6E73F8CE2A974B1300DCAC44 /* AppDelegate.swift in Sources */,
 				6EE60AC72A9891FE006C9DAE /* APIManager.swift in Sources */,
 				6E61DF2E2A97AB07008205D0 /* Podcast.swift in Sources */,
 				6E61DF2B2A97A824008205D0 /* SearchTableViewController.swift in Sources */,
+				6EED34232A9D36CD00000212 /* PodcastEpisodeTableViewCell.swift in Sources */,
 				6E61DF292A979BFC008205D0 /* MainTabBarController.swift in Sources */,
 				6E73F8D02A974B1300DCAC44 /* SceneDelegate.swift in Sources */,
 				6EE60AC52A989149006C9DAE /* iTunesService.swift in Sources */,
+				6EE60AD22A9C8B9C006C9DAE /* PodcastEpisodesTableViewController.swift in Sources */,
+				6E65F4BA2A9E801B00E9A159 /* PodcastTableHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,6 +510,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		6EED341D2A9D298500000212 /* XCRemoteSwiftPackageReference "FeedKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nmdias/FeedKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -490,6 +530,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6EE60ACE2A9B9F28006C9DAE /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		6EED341E2A9D298500000212 /* FeedKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6EED341D2A9D298500000212 /* XCRemoteSwiftPackageReference "FeedKit" */;
+			productName = FeedKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
