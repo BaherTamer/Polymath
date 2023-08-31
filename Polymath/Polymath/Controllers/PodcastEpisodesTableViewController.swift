@@ -95,7 +95,6 @@ extension PodcastEpisodesTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let podcast else {return }
         let episode = self.episodes[indexPath.row]
         
         let window = UIApplication.shared.connectedScenes.compactMap {

@@ -141,7 +141,7 @@
                                         </preferredSymbolConfiguration>
                                     </state>
                                     <connections>
-                                        <action selector="playButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="9ul-He-yTn"/>
+                                        <action selector="playPauseButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="9ul-He-yTn"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2w-Hd-uz5">
@@ -199,6 +199,7 @@
                 <outlet property="backgroundImageView" destination="TZh-u1-b19" id="OCt-zD-Jbt"/>
                 <outlet property="currentTimeLabel" destination="Q7J-Mf-rJp" id="6OB-r3-2ct"/>
                 <outlet property="episodeLabel" destination="wqC-li-leO" id="w0N-6Y-ndZ"/>
+                <outlet property="playPauseButton" destination="M4h-e4-9Xe" id="HNj-WR-vsn"/>
                 <outlet property="podcastImageView" destination="QfA-Xu-ufm" id="4yn-Un-wCO"/>
                 <outlet property="podcastLabel" destination="25c-rw-K3K" id="qZN-Ox-Y8Y"/>
                 <outlet property="totalTimeLabel" destination="5Br-ur-aWj" id="to4-yv-h0h"/>
