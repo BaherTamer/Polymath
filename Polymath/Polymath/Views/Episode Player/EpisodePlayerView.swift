@@ -122,10 +122,10 @@ extension EpisodePlayerView {
     private func observeEpisodeCurrentTime() {
         let interval = CMTimeMake(value: 1, timescale: 2)
         
-        self.avPlayer.addPeriodicTimeObserver(forInterval: interval, queue: .main) { currentTime in
-            self.currentTimeLabel.text = currentTime.toString()
-            self.totalTimeLabel.text = self.avPlayer.currentItem?.duration.toString()
-            self.updatePlayerSlider()
+        self.avPlayer.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] currentTime in
+            self?.currentTimeLabel.text = currentTime.toString()
+            self?.totalTimeLabel.text = self?.avPlayer.currentItem?.duration.toString()
+            self?.updatePlayerSlider()
         }
     }
     
