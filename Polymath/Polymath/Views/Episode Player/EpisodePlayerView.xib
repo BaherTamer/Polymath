@@ -86,6 +86,9 @@
                                     <rect key="frame" x="-2" y="0.0" width="329" height="31"/>
                                     <color key="minimumTrackTintColor" systemColor="systemPinkColor"/>
                                     <color key="maximumTrackTintColor" systemColor="secondaryLabelColor"/>
+                                    <connections>
+                                        <action selector="timeSliderChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="o8l-wR-hV6"/>
+                                    </connections>
                                 </slider>
                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Lh-Di-K5W" userLabel="Timeframes HStack">
                                     <rect key="frame" x="0.0" y="30" width="325" height="16"/>

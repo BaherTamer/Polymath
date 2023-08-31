@@ -68,10 +68,28 @@ class EpisodePlayerView: UIView {
         handlePlayPause()
     }
     
+    @IBAction func timeSliderChanged(_ sender: UISlider) {
+        guard let duration = self.avPlayer.currentItem?.duration else { return }
+        let sliderValue = sender.value
+        
+        let durationInSeconds = CMTimeGetSeconds(duration)
+        let newTimeInSeconds = Float64(sliderValue) * durationInSeconds
+        
+        let newTime = CMTimeMakeWithSeconds(newTimeInSeconds, preferredTimescale: Int32(NSEC_PER_SEC))
+        self.avPlayer.seek(to: newTime)
+        self.avPlayer.play() // BUG: Player stops after slider changed
+    }
+    
     @IBAction func backwardButtonPressed(_ sender: UIButton) {
+        let fifteenSeconds = CMTimeMakeWithSeconds(15, preferredTimescale: Int32(NSEC_PER_SEC))
+        let newTime = CMTimeSubtract(self.avPlayer.currentTime(), fifteenSeconds)
+        self.avPlayer.seek(to: newTime)
     }
     
     @IBAction func forwardButtonPressed(_ sender: UIButton) {
+        let fifteenSeconds = CMTimeMakeWithSeconds(15, preferredTimescale: Int32(NSEC_PER_SEC))
+        let newTime = CMTimeAdd(self.avPlayer.currentTime(), fifteenSeconds)
+        self.avPlayer.seek(to: newTime)
     }
     
 }
