@@ -13,7 +13,10 @@ struct Episode {
     let artistName: String
     let pubDate: Date
     let duration: TimeInterval
+    
     let artworkUrl600: String
+    let trackName: String
+    let streamURL: String
 }
 
 extension Episode {
@@ -23,5 +26,7 @@ extension Episode {
         self.pubDate = feed.pubDate ?? .now
         self.duration = feed.iTunes?.iTunesDuration ?? .zero
         self.artworkUrl600 = podcast.artworkUrl600 ?? ""
+        self.trackName = podcast.trackName ?? "N/A"
+        self.streamURL = feed.enclosure?.attributes?.url ?? ""
     }
 }
