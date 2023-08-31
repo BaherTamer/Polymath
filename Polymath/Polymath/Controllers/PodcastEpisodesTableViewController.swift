@@ -97,16 +97,17 @@ extension PodcastEpisodesTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let episode = self.episodes[indexPath.row]
         
-        let window = UIApplication.shared.connectedScenes.compactMap {
-            ($0 as? UIWindowScene)?.keyWindow
-        }.last
-        
         let episodePlayerView = Bundle.main.loadNibNamed("EpisodePlayerView", owner: self)?.first as! EpisodePlayerView
         
         episodePlayerView.configure(episode: episode)
         episodePlayerView.frame = self.view.frame
-        window?.addSubview(episodePlayerView)
         
+        let viewController = UIViewController()
+        viewController.view = episodePlayerView
+        viewController.modalPresentationStyle = .fullScreen
+        
+        episodePlayerView.viewController = viewController
+        present(viewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

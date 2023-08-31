@@ -20,6 +20,8 @@ class EpisodePlayerView: UIView {
     @IBOutlet weak var totalTimeLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton!
     
+    weak var viewController: UIViewController!
+    
     let avPlayer: AVPlayer = {
         let player = AVPlayer()
         player.automaticallyWaitsToMinimizeStalling = false
@@ -58,7 +60,7 @@ class EpisodePlayerView: UIView {
     }
     
     @IBAction func dismissButtonPressed(_ sender: UIButton) {
-        self.removeFromSuperview()
+        self.viewController.dismiss(animated: true)
     }
     
     @IBAction func downloadButtonPressed(_ sender: UIButton) {
