@@ -104,7 +104,7 @@ extension PodcastEpisodesTableViewController {
         
         let episodePlayerView = Bundle.main.loadNibNamed("EpisodePlayerView", owner: self)?.first as! EpisodePlayerView
         
-        episodePlayerView.configure(episode: episode, podcast: podcast)
+        episodePlayerView.configure(episode: episode)
         episodePlayerView.frame = self.view.frame
         window?.addSubview(episodePlayerView)
         

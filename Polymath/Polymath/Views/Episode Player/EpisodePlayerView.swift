@@ -14,13 +14,15 @@ class EpisodePlayerView: UIView {
     @IBOutlet weak var podcastImageView: UIImageView!
     @IBOutlet weak var podcastLabel: UILabel!
     @IBOutlet weak var episodeLabel: UILabel!
+    @IBOutlet weak var currentTimeLabel: UILabel!
+    @IBOutlet weak var totalTimeLabel: UILabel!
     
-    func configure(episode: Episode, podcast: Podcast) {
-        podcastLabel.text = podcast.trackName ?? "N/A"
+    func configure(episode: Episode) {
+        podcastLabel.text = episode.trackName
         episodeLabel.text = episode.title
         
         
-        guard let imageURL = URL(string: podcast.artworkUrl600 ?? "") else {
+        guard let imageURL = URL(string: episode.artworkUrl600) else {
             print("DEBUG: Failed to load podcast image URL.")
             return
         }
