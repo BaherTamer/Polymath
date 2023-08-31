@@ -15,6 +15,7 @@ class EpisodePlayerView: UIView {
     @IBOutlet weak var podcastImageView: UIImageView!
     @IBOutlet weak var podcastLabel: UILabel!
     @IBOutlet weak var episodeLabel: UILabel!
+    @IBOutlet weak var currentTimeSlider: UISlider!
     @IBOutlet weak var currentTimeLabel: UILabel!
     @IBOutlet weak var totalTimeLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton!
@@ -24,6 +25,12 @@ class EpisodePlayerView: UIView {
         player.automaticallyWaitsToMinimizeStalling = false
         return player
     }()
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        observeEpisodeCurrentTime()
+    }
     
     func configure(episode: Episode) {
         podcastLabel.text = episode.trackName
@@ -94,4 +101,22 @@ extension EpisodePlayerView {
         }
     }
     
+    private func observeEpisodeCurrentTime() {
+        let interval = CMTimeMake(value: 1, timescale: 2)
+        
+        self.avPlayer.addPeriodicTimeObserver(forInterval: interval, queue: .main) { currentTime in
+            self.currentTimeLabel.text = currentTime.toString()
+            self.totalTimeLabel.text = self.avPlayer.currentItem?.duration.toString()
+            self.updatePlayerSlider()
+        }
+    }
+    
+    private func updatePlayerSlider() {
+        let currentTimeSeconds = CMTimeGetSeconds(self.avPlayer.currentTime( ))
+        let durationSeconds = CMTimeGetSeconds(self.avPlayer.currentItem?.duration ??
+        CMTimeMake(value: 0, timescale: 0))
+        
+        let percentage = currentTimeSeconds / durationSeconds
+        self.currentTimeSlider.value = Float(percentage)
+    }
 }
