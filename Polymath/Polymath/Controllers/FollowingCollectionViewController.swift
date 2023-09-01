@@ -7,7 +7,7 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "FollowingCollectionViewCell"
 
 class FollowingCollectionViewController: UICollectionViewController {
     
@@ -17,7 +17,7 @@ class FollowingCollectionViewController: UICollectionViewController {
     }
     
     private func setupCollectionView() {
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(FollowingCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.showsVerticalScrollIndicator = false
     }
     
@@ -33,10 +33,6 @@ extension FollowingCollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        cell.backgroundColor = .systemGray6
-        cell.layer.cornerRadius = 8
-    
         return cell
     }
     
@@ -48,7 +44,7 @@ extension FollowingCollectionViewController: UICollectionViewDelegateFlowLayout 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // 3 * 16 = Leading, Middle, and Trailing Space
         let sideSize = (view.frame.width - (3 * 16)) / 2
-        return CGSize(width: sideSize, height: sideSize)
+        return CGSize(width: sideSize, height: sideSize + 48)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
