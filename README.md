@@ -8,7 +8,7 @@ Polymath is a podcast app for listening and downloading episodes using **UIKit**
 <br>
 
 ## ▶️ Demo
-Watch the demo video on **[YouTube](https://youtu.be/ortKNhePaNI)**.
+Watch the demo video on **[YouTube](https://youtu.be/QAfcWXwreU4)**.
 
 <br>
 
