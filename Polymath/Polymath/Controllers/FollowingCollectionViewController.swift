@@ -47,6 +47,14 @@ extension FollowingCollectionViewController {
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let podcastEpisodesVC = PodcastEpisodesTableViewController()
+        let podcast = self.podcasts[indexPath.item]
+        podcastEpisodesVC.podcast = podcast
+        
+        navigationController?.pushViewController(podcastEpisodesVC, animated: true)
+    }
+    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
