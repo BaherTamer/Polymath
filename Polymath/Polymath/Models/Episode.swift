@@ -8,7 +8,7 @@
 import FeedKit
 import Foundation
 
-struct Episode {
+struct Episode: Codable {
     let title: String
     let artistName: String
     let pubDate: Date
@@ -17,6 +17,8 @@ struct Episode {
     let artworkUrl600: String
     let trackName: String
     let streamURL: String
+    
+    var offlineURL: String?
 }
 
 extension Episode {

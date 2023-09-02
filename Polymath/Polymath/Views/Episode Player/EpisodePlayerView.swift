@@ -12,6 +12,7 @@ import UIKit
 class EpisodePlayerView: UIView {
     
     @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var downloadButton: UIButton!
     @IBOutlet weak var podcastImageView: UIImageView!
     @IBOutlet weak var podcastLabel: UILabel!
     @IBOutlet weak var episodeLabel: UILabel!
@@ -21,6 +22,7 @@ class EpisodePlayerView: UIView {
     @IBOutlet weak var playPauseButton: UIButton!
     
     weak var viewController: UIViewController!
+    private var episode: Episode!
     
     let avPlayer: AVPlayer = {
         let player = AVPlayer()
@@ -35,6 +37,12 @@ class EpisodePlayerView: UIView {
     }
     
     func configure(episode: Episode) {
+        self.episode = episode
+        
+        if DownloadManager.isEpisodeDownloaded(episode) {
+            downloadButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
+        }
+        
         podcastLabel.text = episode.trackName
         episodeLabel.text = episode.title
         
@@ -64,6 +72,19 @@ class EpisodePlayerView: UIView {
     }
     
     @IBAction func downloadButtonPressed(_ sender: UIButton) {
+        guard let episode = self.episode else { return }
+        
+        if !(DownloadManager.isEpisodeDownloaded(episode)) {
+            self.downloadButton.setImage(UIImage(systemName: ""), for: .normal)
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(completeDownloading), name: DownloadManager.notificationDownloadComplete, object: nil)
+            
+            DownloadManager.downloadEpisode(episode)
+        }
+    }
+    
+    @objc private func completeDownloading(notification: Notification) {
+        self.downloadButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
     }
     
     @IBAction func playPauseButtonPressed(_ sender: UIButton) {
@@ -98,14 +119,23 @@ class EpisodePlayerView: UIView {
 
 // MARK: - AVKit Player Functions
 extension EpisodePlayerView {
-    
     private func playEpisode(_ episode: Episode) {
-        guard let streamURL = URL(string: episode.streamURL) else {
-            print("DEBUG: Failed to load episode stream URL.")
+        var audioURL: URL?
+        
+        if episode.offlineURL != nil {
+            let audioFileName = URL(string: episode.offlineURL ?? "")?.lastPathComponent
+            
+            audioURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(audioFileName ?? "", conformingTo: .audio)
+        } else {
+            audioURL = URL(string: episode.streamURL)
+        }
+        
+        guard let audioURL else {
+            print("DEBUG: Failed to load episode URL.")
             return
         }
         
-        let playerItem = AVPlayerItem(url: streamURL)
+        let playerItem = AVPlayerItem(url: audioURL)
         
         self.avPlayer.replaceCurrentItem(with: playerItem)
         self.avPlayer.play()
