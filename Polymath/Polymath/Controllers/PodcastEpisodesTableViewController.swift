@@ -122,11 +122,11 @@ extension PodcastEpisodesTableViewController {
             return
         }
         
-        if FollowingManager.isPodcastFollowed(podcast) {
-            FollowingManager.unfollowPodcast(podcast)
+        if FollowManager.isPodcastFollowed(podcast) {
+            FollowManager.unfollowPodcast(podcast)
             sender.setTitle("Follow", for: .normal)
         } else {
-            FollowingManager.followPodcast(podcast)
+            FollowManager.followPodcast(podcast)
             sender.setTitle("Following", for: .normal)
         }
     }
@@ -136,7 +136,7 @@ extension PodcastEpisodesTableViewController {
             return "Follow"
         }
         
-        if FollowingManager.isPodcastFollowed(podcast) {
+        if FollowManager.isPodcastFollowed(podcast) {
             return "Following"
         } else {
             return "Follow"

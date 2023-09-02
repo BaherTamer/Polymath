@@ -11,7 +11,7 @@ private let reuseIdentifier = "FollowingCollectionViewCell"
 
 class FollowingCollectionViewController: UICollectionViewController {
     
-    var podcasts = FollowingManager.fetchFollowedPodcasts()
+    var podcasts = FollowManager.fetchFollowedPodcasts()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,7 @@ class FollowingCollectionViewController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.podcasts = FollowingManager.fetchFollowedPodcasts()
+        self.podcasts = FollowManager.fetchFollowedPodcasts()
         collectionView.reloadData()
     }
     

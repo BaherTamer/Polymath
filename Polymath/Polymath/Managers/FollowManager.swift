@@ -1,5 +1,5 @@
 //
-//  FollowingManager.swift
+//  FollowManager.swift
 //  Polymath
 //
 //  Created by Baher Tamer on 02/09/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FollowingManager {
+struct FollowManager {
     
     static private let followingPodcastsKey = "followingPodcastsKey"
     static private var podcasts: [Podcast] = []
