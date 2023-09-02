@@ -28,7 +28,7 @@ extension MainTabBarController {
         tabBar.tintColor = .systemPink
         
         viewControllers = [
-            setupNavigationController(for: ViewController(), title: "Following", imageName: "headphones.circle"),
+            setupNavigationController(for: setupFollowingCollectionViewController(), title: "Following", imageName: "headphones.circle"),
             setupNavigationController(for: SearchTableViewController(), title: "Search", imageName: "magnifyingglass.circle"),
             setupNavigationController(for: ViewController(), title: "Downloaded", imageName: "arrow.down.circle")
         ]
@@ -44,6 +44,11 @@ extension MainTabBarController {
         rootViewController.navigationItem.title = title
         
         return navigationController
+    }
+    
+    private func setupFollowingCollectionViewController() -> FollowingCollectionViewController {
+        let layout = UICollectionViewFlowLayout()
+        return FollowingCollectionViewController(collectionViewLayout: layout)
     }
     
 }
