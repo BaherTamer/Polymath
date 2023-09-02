@@ -28,39 +28,13 @@ struct DownloadManager {
     
     static func downloadEpisode(_ episode: Episode) {
         Self.episodes = Self.fetchDownloadedEpisodes()
-        
-        do {
-            Self.episodes.insert(episode, at: 0)
-            Self.saveEpisodeOffline(episode)
-            try Self.saveDownloadedEpisodes()
-        } catch {
-            print("DEBUG: Failed to save downloaded episodes,", error)
-        }
-    }
-    
-    static private func saveEpisodeOffline(_ episode: Episode) {
-        let downloadRequest = DownloadRequest.suggestedDownloadDestination()
-        
-        AF.download(episode.streamURL, to: downloadRequest).response { respone in
-            guard let index = Self.episodes.firstIndex(where: { $0.title == episode.title }) else { return }
-            
-            Self.episodes[index].offlineURL = respone.fileURL?.absoluteString ?? ""
-            print("Downloaded Success,", respone.fileURL?.absoluteString ?? "")
-        }
+        Self.episodes.insert(episode, at: 0)
+        Self.saveEpisodeOffline(episode)
     }
     
     static func isEpisodeDownloaded(_ episode: Episode) -> Bool {
         Self.episodes = Self.fetchDownloadedEpisodes()
         return Self.episodes.contains(where: { $0.title == episode.title })
-    }
-    
-    static private func saveDownloadedEpisodes() throws {
-        do {
-            let data = try JSONEncoder().encode(Self.episodes)
-            UserDefaults.standard.set(data, forKey: Self.downloadingEpisodeKey)
-        } catch {
-            throw error
-        }
     }
     
     static func removeDownloadedEpisode(_ episode: Episode) {
@@ -75,11 +49,33 @@ struct DownloadManager {
         }
         
         Self.episodes.remove(at: index)
+        Self.saveDownloadedEpisodes()
+    }
+    
+}
+
+// MARK: - Helpers
+extension DownloadManager {
+    
+    static private func saveEpisodeOffline(_ episode: Episode) {
+        let downloadRequest = DownloadRequest.suggestedDownloadDestination()
         
+        AF.download(episode.streamURL, to: downloadRequest).response { respone in
+            guard let index = Self.episodes.firstIndex(where: { $0.title == episode.title }) else { return }
+            
+            Self.episodes[index].offlineURL = respone.fileURL?.absoluteString ?? ""
+            Self.saveDownloadedEpisodes()
+            
+            print("DEBUG: Download Sucess")
+        }
+    }
+    
+    static private func saveDownloadedEpisodes() {
         do {
-            try Self.saveDownloadedEpisodes()
+            let data = try JSONEncoder().encode(Self.episodes)
+            UserDefaults.standard.set(data, forKey: Self.downloadingEpisodeKey)
         } catch {
-            print("DEBUG: Failed to remove downloaded episodes,", error)
+            print("DEBUG: Failed to save downloaded episodes,", error)
         }
     }
     
