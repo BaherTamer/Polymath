@@ -30,7 +30,7 @@ extension MainTabBarController {
         viewControllers = [
             setupNavigationController(for: setupFollowingCollectionViewController(), title: "Following", imageName: "headphones.circle"),
             setupNavigationController(for: SearchTableViewController(), title: "Search", imageName: "magnifyingglass.circle"),
-            setupNavigationController(for: ViewController(), title: "Downloaded", imageName: "arrow.down.circle")
+            setupNavigationController(for: DownloadedTableViewController(), title: "Downloaded", imageName: "arrow.down.circle")
         ]
     }
     
