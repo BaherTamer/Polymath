@@ -12,6 +12,7 @@ import UIKit
 class EpisodePlayerView: UIView {
     
     @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var downloadButton: UIButton!
     @IBOutlet weak var podcastImageView: UIImageView!
     @IBOutlet weak var podcastLabel: UILabel!
     @IBOutlet weak var episodeLabel: UILabel!
@@ -37,6 +38,10 @@ class EpisodePlayerView: UIView {
     
     func configure(episode: Episode) {
         self.episode = episode
+        
+        if DownloadManager.isEpisodeDownloaded(episode) {
+            downloadButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
+        }
         
         podcastLabel.text = episode.trackName
         episodeLabel.text = episode.title
@@ -68,7 +73,10 @@ class EpisodePlayerView: UIView {
     
     @IBAction func downloadButtonPressed(_ sender: UIButton) {
         guard let episode = self.episode else { return }
-        DownloadManager.downloadEpisode(episode)
+        
+        if !(DownloadManager.isEpisodeDownloaded(episode)) {
+            DownloadManager.downloadEpisode(episode)
+        }
     }
     
     @IBAction func playPauseButtonPressed(_ sender: UIButton) {
