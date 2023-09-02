@@ -13,7 +13,11 @@ Watch the demo video on **[YouTube](https://youtu.be/ortKNhePaNI)**.
 <br>
 
 ## 🌟 Features
-- 
+- Search for a podcast
+- View all episodes for a podcast
+- Follow a podcast
+- Download a podcast
+- Listen to a podcast (Online & Offline)
 
 <br>
 
@@ -42,8 +46,9 @@ Watch the demo video on **[YouTube](https://youtu.be/ortKNhePaNI)**.
 
 ## 📦 Dependencies
 This project uses SPM (Swift Package Manager) as Dependency manager.
-- [Firebase](https://github.com/firebase/firebase-ios-sdk)
-- [Kingfisher](https://github.com/onevcat/Kingfisher)
+- [Alamofire](https://github.com/Alamofire/Alamofire)
+- [SDWebImage](https://github.com/SDWebImage/SDWebImage)
+- [FeedKit](https://github.com/nmdias/FeedKit)
 
 <br>
 
