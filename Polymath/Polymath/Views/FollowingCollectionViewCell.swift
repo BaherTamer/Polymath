@@ -9,6 +9,16 @@ import UIKit
 
 class FollowingCollectionViewCell: UICollectionViewCell {
     
+    var podcast: Podcast! {
+        didSet {
+            podcastLabel.text = podcast.trackName
+            artistNameLabel.text = podcast.artistName
+            
+            let url = URL(string: podcast.artworkUrl600 ?? "")
+            podcastImageView.sd_setImage(with: url)
+        }
+    }
+    
     let podcastImageView = UIImageView()
     let podcastLabel = UILabel()
     let artistNameLabel = UILabel()

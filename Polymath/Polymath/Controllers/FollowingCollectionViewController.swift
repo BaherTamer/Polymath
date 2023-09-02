@@ -11,9 +11,18 @@ private let reuseIdentifier = "FollowingCollectionViewCell"
 
 class FollowingCollectionViewController: UICollectionViewController {
     
+    var podcasts = FollowingManager.fetchFollowedPodcasts()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.podcasts = FollowingManager.fetchFollowedPodcasts()
+        collectionView.reloadData()
     }
     
     private func setupCollectionView() {
@@ -27,12 +36,14 @@ class FollowingCollectionViewController: UICollectionViewController {
 extension FollowingCollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 10
+        self.podcasts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FollowingCollectionViewCell
+        
+        cell.podcast = self.podcasts[indexPath.item]
+        
         return cell
     }
     

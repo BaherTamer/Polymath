@@ -16,13 +16,11 @@ struct FollowingManager {
         do {
             if let data = UserDefaults.standard.data(forKey: Self.followingPodcastsKey) {
                 let fetchedPodcasts = try JSONDecoder().decode([Podcast].self, from: data)
-                print("Fetched Success")
-                print(fetchedPodcasts)
-                print("\n")
+                
                 return fetchedPodcasts
             }
         } catch {
-            print("Failed to fetch followed podcasts,", error)
+            print("DEBUG: Failed to fetch followed podcasts,", error)
             return []
         }
         
@@ -35,9 +33,8 @@ struct FollowingManager {
         do {
             Self.podcasts.append(podcast)
             try Self.saveFollowedPodcasts()
-            print("Saved sucess")
         } catch {
-            print("Failed to save followed podcast,", error)
+            print("DEBUG: Failed to save followed podcast,", error)
         }
     }
     
@@ -57,12 +54,12 @@ struct FollowingManager {
     
     static func unfollowPodcast(_ podcast: Podcast) {
         guard Self.isPodcastFollowed(podcast) else {
-            print("Podcast was not found")
+            print("DEBUG: Podcast was not found")
             return
         }
         
         guard let index = Self.podcasts.firstIndex(where: { $0.trackName == podcast.trackName }) else {
-            print("Index was not found")
+            print("DEBUG: Index was not found")
             return
         }
         
@@ -72,7 +69,7 @@ struct FollowingManager {
             try Self.saveFollowedPodcasts()
             print(Self.podcasts)
         } catch {
-            print("Failed to unfollow podcast,", error)
+            print("DEBUG: Failed to unfollow podcast,", error)
         }
     }
     
