@@ -17,6 +17,8 @@ struct Episode: Codable {
     let artworkUrl600: String
     let trackName: String
     let streamURL: String
+    
+    var offlineURL: String?
 }
 
 extension Episode {
