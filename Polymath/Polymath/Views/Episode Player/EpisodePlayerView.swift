@@ -21,6 +21,7 @@ class EpisodePlayerView: UIView {
     @IBOutlet weak var playPauseButton: UIButton!
     
     weak var viewController: UIViewController!
+    private var episode: Episode!
     
     let avPlayer: AVPlayer = {
         let player = AVPlayer()
@@ -35,6 +36,8 @@ class EpisodePlayerView: UIView {
     }
     
     func configure(episode: Episode) {
+        self.episode = episode
+        
         podcastLabel.text = episode.trackName
         episodeLabel.text = episode.title
         
@@ -64,6 +67,8 @@ class EpisodePlayerView: UIView {
     }
     
     @IBAction func downloadButtonPressed(_ sender: UIButton) {
+        guard let episode = self.episode else { return }
+        DownloadManager.downloadEpisode(episode)
     }
     
     @IBAction func playPauseButtonPressed(_ sender: UIButton) {
