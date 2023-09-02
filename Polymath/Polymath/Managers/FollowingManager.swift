@@ -67,7 +67,6 @@ struct FollowingManager {
         
         do {
             try Self.saveFollowedPodcasts()
-            print(Self.podcasts)
         } catch {
             print("DEBUG: Failed to unfollow podcast,", error)
         }
