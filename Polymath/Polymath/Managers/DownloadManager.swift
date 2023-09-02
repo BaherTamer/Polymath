@@ -60,13 +60,12 @@ extension DownloadManager {
     static private func saveEpisodeOffline(_ episode: Episode) {
         let downloadRequest = DownloadRequest.suggestedDownloadDestination()
         
-        AF.download(episode.streamURL, to: downloadRequest).response { respone in
+        AF.download(episode.streamURL, to: downloadRequest).response { response in
             guard let index = Self.episodes.firstIndex(where: { $0.title == episode.title }) else { return }
+            Self.episodes[index].offlineURL = response.fileURL?.description
+            print("DEBUG: Download Sucess,", Self.episodes[index].offlineURL)
             
-            Self.episodes[index].offlineURL = respone.fileURL?.absoluteString ?? ""
             Self.saveDownloadedEpisodes()
-            
-            print("DEBUG: Download Sucess")
         }
     }
     

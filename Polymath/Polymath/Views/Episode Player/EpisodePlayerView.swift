@@ -111,7 +111,6 @@ class EpisodePlayerView: UIView {
 
 // MARK: - AVKit Player Functions
 extension EpisodePlayerView {
-    #warning("Fix Play Offline")
     private func playEpisode(_ episode: Episode) {
         var audioURL: URL?
         
@@ -119,12 +118,8 @@ extension EpisodePlayerView {
             let audioFileName = URL(string: episode.offlineURL ?? "")?.lastPathComponent
             
             audioURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(audioFileName ?? "", conformingTo: .audio)
-            
-            print("DEBUG: Playing Offline,", audioURL)
-            print("DEBUG: URL,",  URL(string: episode.offlineURL ?? ""))
         } else {
             audioURL = URL(string: episode.streamURL)
-            print("DEBUG: Playing Online,", audioURL)
         }
         
         guard let audioURL else {
