@@ -72,7 +72,9 @@ extension PodcastEpisodesTableViewController {
         headerView.podcastImageView.sd_setImage(with: imageURL)
         headerView.artistLabel.text = self.podcast?.artistName ?? "N/A"
         headerView.podcastLabel.text = self.podcast?.trackName ?? "N/A"
-        headerView.followButton.setTitle("Follow", for: .normal)
+        
+        headerView.followButton.setTitle(setFollowButtonTitle(), for: .normal)
+        headerView.followButton.addTarget(self, action: #selector(followButtonPressed), for: .touchUpInside)
         
         tableView.tableHeaderView = headerView
     }
@@ -109,6 +111,36 @@ extension PodcastEpisodesTableViewController {
         episodePlayerView.viewController = viewController
         present(viewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+}
+
+extension PodcastEpisodesTableViewController {
+    
+    @objc func followButtonPressed(_ sender: UIButton) {
+        guard let podcast = self.podcast else {
+            return
+        }
+        
+        if FollowingManager.isPodcastFollowed(podcast) {
+            FollowingManager.unfollowPodcast(podcast)
+            sender.setTitle("Follow", for: .normal)
+        } else {
+            FollowingManager.followPodcast(podcast)
+            sender.setTitle("Following", for: .normal)
+        }
+    }
+    
+    private func setFollowButtonTitle() -> String {
+        guard let podcast = self.podcast else {
+            return "Follow"
+        }
+        
+        if FollowingManager.isPodcastFollowed(podcast) {
+            return "Following"
+        } else {
+            return "Follow"
+        }
     }
     
 }
