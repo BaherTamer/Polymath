@@ -10,6 +10,7 @@ import Foundation
 
 struct DownloadManager {
     
+    static let notificationDownloadComplete = Notification.Name("notificationDownloadComplete")
     static private let downloadingEpisodeKey = "downloadingEpisodeKey"
     static private var episodes: [Episode] = []
     
@@ -63,7 +64,8 @@ extension DownloadManager {
         AF.download(episode.streamURL, to: downloadRequest).response { response in
             guard let index = Self.episodes.firstIndex(where: { $0.title == episode.title }) else { return }
             Self.episodes[index].offlineURL = response.fileURL?.description
-            print("DEBUG: Download Sucess,", Self.episodes[index].offlineURL)
+            
+            NotificationCenter.default.post(name: notificationDownloadComplete, object: nil, userInfo: nil)
             
             Self.saveDownloadedEpisodes()
         }

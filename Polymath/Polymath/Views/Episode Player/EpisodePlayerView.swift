@@ -75,8 +75,16 @@ class EpisodePlayerView: UIView {
         guard let episode = self.episode else { return }
         
         if !(DownloadManager.isEpisodeDownloaded(episode)) {
+            self.downloadButton.setImage(UIImage(systemName: ""), for: .normal)
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(completeDownloading), name: DownloadManager.notificationDownloadComplete, object: nil)
+            
             DownloadManager.downloadEpisode(episode)
         }
+    }
+    
+    @objc private func completeDownloading(notification: Notification) {
+        self.downloadButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
     }
     
     @IBAction func playPauseButtonPressed(_ sender: UIButton) {
