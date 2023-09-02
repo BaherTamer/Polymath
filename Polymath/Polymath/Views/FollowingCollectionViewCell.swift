@@ -60,7 +60,9 @@ extension FollowingCollectionViewCell {
     
     private func configurePodcastImageView() {
         self.podcastImageView.backgroundColor = .systemGray6
-        self.podcastImageView.layer.cornerRadius = 8
+        self.podcastImageView.layer.cornerRadius = 12
+        self.podcastImageView.layer.masksToBounds = true
+
         
         let podcastImageViewConstraints = [
             self.podcastImageView.heightAnchor.constraint(equalTo: self.podcastImageView.widthAnchor)
