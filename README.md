@@ -27,6 +27,7 @@ Watch the demo video on **[YouTube](https://youtu.be/QAfcWXwreU4)**.
 - AVKit
 - Concurrency
 - UserDefaults
+- Notification Center
 
 <br>
 
