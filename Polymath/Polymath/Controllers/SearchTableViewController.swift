@@ -72,9 +72,6 @@ extension SearchTableViewController: UISearchBarDelegate {
         navigationItem.hidesSearchBarWhenScrolling = false
         
         searchController.searchBar.delegate = self
-        
-        #warning("Remove this line for testing purpose only")
-        searchBar(searchController.searchBar, textDidChange: "Hazem")
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
